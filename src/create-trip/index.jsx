@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { SelectBudgetOptions, SelectTravelesList } from "@/constants/options";
 import React, { useEffect, useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { toast } from "sonner";
 
 function CreatTrip() {
   const [place, setPlace] = useState();
@@ -17,8 +18,9 @@ function CreatTrip() {
   }, [formData]);
 
   const OnGenerateTrip = () => {
-    if(Number(formData?.noOfDays)>5)
+    if(Number(formData?.noOfDays)>5 &&! formData?.location|| !formData?.budget || !formData?.people)
     {
+        toast.error("Please fill all details correctly.");
         return;
     }
     console.log(formData)
